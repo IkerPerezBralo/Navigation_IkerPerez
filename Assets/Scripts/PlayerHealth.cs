@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField]
-    private Canvas canvas;
+    private GameObject canvas;
     private Animator animator;
+
+    private Canvas finalCanvas;
+
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
-        canvas = GetComponent<Canvas>();
-        canvas.enabled = false;
+        finalCanvas = canvas.GetComponent<Canvas>();
+        finalCanvas.enabled = false;
     }
 
     // Update is called once per frame
@@ -30,10 +34,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    IEnumerator Muerte()
+    private IEnumerator Muerte()
     {
-        animator.Play("Die");
+        animator.SetTrigger("Die");
         yield return new WaitForSeconds(0.8f);
-        canvas.enabled = true;
+        finalCanvas.enabled = true;
     }
 }

@@ -21,4 +21,5 @@ public class SceneSwap : MonoBehaviour
     {
         SceneManager.LoadScene("Game");
     }
+
 }
