@@ -30,7 +30,11 @@ public class PlayerHealth : MonoBehaviour
     {
         if(collision.gameObject.tag == "Ghost")
         {
-            StartCoroutine(Muerte());
+            if (this.GetComponent<PlayerAttack>().isAttacking != true)
+            {
+                StartCoroutine(Muerte());
+            }
+            Destroy(collision.gameObject);
         }
     }
 
@@ -38,6 +42,7 @@ public class PlayerHealth : MonoBehaviour
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(0.8f);
+        Time.timeScale = 0;
         finalCanvas.enabled = true;
     }
 }
